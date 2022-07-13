@@ -87,9 +87,10 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
+  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
+  baseUrl: 'http://http://localhost:3001',
   headers: {
-    authorization: '65213cdc-9584-424f-b4a4-279d4b91e913',
+    authorization: '2e48302a6e4e6f4d364e51ef2d924411121f752eb4087571abe112de648773ff',
     'Content-Type': 'application/json'
   }
 });

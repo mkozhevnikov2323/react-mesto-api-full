@@ -38,8 +38,8 @@ function Register({ onRegister }) {
           autoComplete="on"
           name="password"
           type="password"
-          minLength="5"
-          maxLength="5"
+          minLength="8"
+          // maxLength="5"
           className="login__input"
           placeholder="Пароль"
           onChange={handleChange}
