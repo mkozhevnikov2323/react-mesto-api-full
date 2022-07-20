@@ -13,7 +13,6 @@ export const register = ( {password, email} ) => {
     return fetch(`${BASE_URL}/signup`, {
       method: 'POST',
       headers: {
-        'Origin': 'http://localhost:3000',
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },

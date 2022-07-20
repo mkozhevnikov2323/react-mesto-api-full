@@ -40,7 +40,8 @@ function MyProfile({
       </section>
       <section>
         <ul className="elements">
-          {cards.map((card) => (
+        {console.log('cards', cards)}
+          {/* {cards.map((card) => (
             <Card
               key={card._id}
               card={card}
@@ -48,7 +49,7 @@ function MyProfile({
               onCardLike={onCardLike}
               onDeleteButton={onDeleteButton}
             />
-          ))}
+          ))} */}
         </ul>
       </section>
     </main>

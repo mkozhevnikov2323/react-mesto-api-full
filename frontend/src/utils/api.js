@@ -65,7 +65,7 @@ class Api {
     return this._createFetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: {
-        authorization: `${this._token}`,
+        'authorization': `${this._token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -79,7 +79,7 @@ class Api {
     return this._createFetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
-        authorization: `${this._token}`,
+        'authorization': `${this._token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -89,12 +89,12 @@ class Api {
   }
 }
 
+const token = localStorage.getItem('token');
+
 export const api = new Api({
-  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
   baseUrl: 'http://localhost:3001',
   headers: {
-    authorization: '2e48302a6e4e6f4d364e51ef2d924411121f752eb4087571abe112de648773ff',
+    'authorization': `Bearer ${token}`,
     'Content-Type': 'application/json',
-    // 'Access-Control-Allow-Origin':
   }
 });

@@ -42,6 +42,7 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
+
   useEffect(() => {
     api
       .getInitialCards()
@@ -53,7 +54,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, []);
+  }, [cards, currentUser, loggedIn, tokenCheck]);
 
   function handleRegSubmit(login) {
     auth.register({
@@ -99,12 +100,13 @@ function App() {
     history.push('/login');
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function tokenCheck() {
     const token = localStorage.getItem('token');
     if (token) {
       auth.getContent(token).then((res) => {
         if (res) {
-          setUserEmail(res.data.email);
+          setUserEmail(res.email);
           setLoggedIn(true);
           history.push('/my-profile');
         }
