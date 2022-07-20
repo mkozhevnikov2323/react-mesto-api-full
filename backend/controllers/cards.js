@@ -6,13 +6,13 @@ module.exports.createCard = (req, res, next) => {
   const { name, link, owner = req.user._id } = req.body;
 
   Card.create({ name, link, owner })
-    .then((card) => res.status(201).send({ data: card }))
+    .then((card) => res.status(201).send(card))
     .catch(next);
 };
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch(next);
 };
 
@@ -27,7 +27,7 @@ module.exports.deleteCardById = (req, res, next) => {
       }
       return card.remove();
     })
-    .then((card) => res.send({ data: card }))
+    .then(() => res.send({ message: 'Карточка удалена' }))
     .catch(next);
 };
 
@@ -41,7 +41,7 @@ module.exports.addLikeCard = (req, res, next) => {
       if (card === null) {
         throw new NotFoundError('Карточка не найдена!');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     .catch(next);
 };
@@ -56,7 +56,7 @@ module.exports.deleteLikeCard = (req, res, next) => {
       if (card === null) {
         throw new NotFoundError('Карточка не найдена!');
       }
-      res.send({ data: card });
+      res.send(card);
     })
     .catch(next);
 };

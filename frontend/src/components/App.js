@@ -34,27 +34,30 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    api
+    if (loggedIn) {
+      api
       .getUserInfo()
       .then((userInfoFromServer) => {
         setCurrentUser(userInfoFromServer);
       })
       .catch((err) => console.log(err));
-  }, []);
-
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
-    api
+    if (loggedIn) {
+      api
       .getInitialCards()
       .then((cards) => {
         setCards(cards);
       })
       .catch((err) => console.log(err));
-  }, []);
+    }
+  }, [loggedIn, cards.length]);
 
   useEffect(() => {
-    tokenCheck();
-  }, [cards, currentUser, loggedIn, tokenCheck]);
+      tokenCheck();
+  }, []);
 
   function handleRegSubmit(login) {
     auth.register({
@@ -213,16 +216,16 @@ function App() {
     setShowLoading(true);
     api
       .setNewCard(data)
-      .then((res) => {
-        setCards([res, ...cards]);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setShowLoading(false);
-      });
+        .then((res) => {
+          setCards([res, ...cards]);
+          closeAllPopups();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setShowLoading(false);
+        });
   }
 
   return (
