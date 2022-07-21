@@ -1,5 +1,4 @@
-// export const BASE_URL = 'https://auth.nomoreparties.co';
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'http://localhost:3000';
 
   function checkResponse(res) {
     if (res.ok) {
@@ -9,7 +8,6 @@ export const BASE_URL = 'http://localhost:3001';
   }
 
 export const register = ( {password, email} ) => {
-    console.log({password, email})
     return fetch(`${BASE_URL}/signup`, {
       method: 'POST',
       headers: {
@@ -21,7 +19,6 @@ export const register = ( {password, email} ) => {
         email: email
         })
     }).then((res) => {
-      console.log(res);
       return checkResponse(res);
     });
   };

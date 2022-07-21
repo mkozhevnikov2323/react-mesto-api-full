@@ -42,7 +42,7 @@ function App() {
       })
       .catch((err) => console.log(err));
     }
-  }, [loggedIn]);
+  }, [loggedIn, currentUser]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -56,7 +56,7 @@ function App() {
   }, [loggedIn, cards.length]);
 
   useEffect(() => {
-      tokenCheck();
+    tokenCheck();
   }, []);
 
   function handleRegSubmit(login) {
@@ -86,6 +86,7 @@ function App() {
           localStorage.setItem("token", data.token);
           setUserEmail(email);
           setLoggedIn(true);
+          tokenCheck();
           history.push("/my-profile");
         }
       })
@@ -103,7 +104,6 @@ function App() {
     history.push('/login');
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   function tokenCheck() {
     const token = localStorage.getItem('token');
     if (token) {
