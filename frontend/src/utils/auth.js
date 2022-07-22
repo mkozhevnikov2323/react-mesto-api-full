@@ -1,4 +1,5 @@
 export const BASE_URL = 'https://api.mesto.mkozhevnikov23.nomoredomains.xyz';
+// export const BASE_URL = 'http://localhost:3001';
 
   function checkResponse(res) {
     if (res.ok) {

@@ -34,30 +34,16 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
+    tokenCheck()
     if (loggedIn) {
-      api
-      .getUserInfo()
-      .then((userInfoFromServer) => {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then(([userInfoFromServer, cards]) => {
         setCurrentUser(userInfoFromServer);
-      })
-      .catch((err) => console.log(err));
-    }
-  }, [loggedIn, currentUser]);
-
-  useEffect(() => {
-    if (loggedIn) {
-      api
-      .getInitialCards()
-      .then((cards) => {
         setCards(cards);
       })
       .catch((err) => console.log(err));
     }
-  }, [loggedIn, cards.length]);
-
-  useEffect(() => {
-    tokenCheck();
-  }, []);
+  }, [loggedIn])
 
   function handleRegSubmit(login) {
     auth.register({
@@ -79,15 +65,13 @@ function App() {
   }
 
   function handleLogin(password, email) {
-    auth
+    return auth
       .authorize(password, email)
       .then((data) => {
         if (data.token) {
           localStorage.setItem("token", data.token);
           setUserEmail(email);
           setLoggedIn(true);
-          tokenCheck();
-          history.push("/my-profile");
         }
       })
       .catch((err) => {
@@ -104,9 +88,9 @@ function App() {
     history.push('/login');
   }
 
-  function tokenCheck() {
-    const token = localStorage.getItem('token');
-    if (token) {
+  const tokenCheck = () => {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
       auth.getContent(token).then((res) => {
         if (res) {
           setUserEmail(res.email);

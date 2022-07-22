@@ -93,6 +93,7 @@ const token = localStorage.getItem('token');
 
 export const api = new Api({
   baseUrl: 'https://api.mesto.mkozhevnikov23.nomoredomains.xyz',
+  // baseUrl: 'http://localhost:3001',
   headers: {
     'authorization': `Bearer ${token}`,
     'Content-Type': 'application/json',
